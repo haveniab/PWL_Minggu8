@@ -54,21 +54,21 @@
             <th width="280px">Action</th>
         </tr>
         
-        @foreach ($mahasiswas as $Mahasiswa)
+        @foreach($mahasiswa as $index => $mahasiswa)
         <tr>
 
-            <td>{{ $Mahasiswa->Nim }}</td>
-            <td>{{ $Mahasiswa->Nama }}</td>
-            <td>{{ $Mahasiswa->Kelas }}</td>
-            <td>{{ $Mahasiswa->Jurusan }}</td>
-            <td>{{ $Mahasiswa->No_Handphone }}</td>
-            <td>{{ $Mahasiswa->Email }}</td>
-            <td>{{ $Mahasiswa->Tanggal_Lahir}}</td>
+            <td>{{ $mahasiswa->Nim}}</td>
+            <td>{{ $mahasiswa->Nama }}</td>
+            <td>{{ $mahasiswa->Kelas->nama_kelas}}</td>
+            <td>{{ $mahasiswa->Jurusan }}</td>
+            <td>{{ $mahasiswa->No_Handphone }}</td>
+            <td>{{ $mahasiswa->Email }}</td>
+            <td>{{ $mahasiswa->Tanggal_Lahir}}</td>
             <td>
-            <form action="{{ route('mahasiswas.destroy',$Mahasiswa->Nim) }}" method="POST">
+            <form action="{{ route('mahasiswas.destroy',$mahasiswa->Nim) }}" method="POST">
 
-                <a class="btn btn-info" href="{{ route('mahasiswas.show',$Mahasiswa->Nim) }}">Show</a>
-                <a class="btn btn-primary" href="{{ route('mahasiswas.edit',$Mahasiswa->Nim) }}">Edit</a>              
+                <a class="btn btn-info" href="{{ route('mahasiswas.show',$mahasiswa->Nim) }}">Show</a>
+                <a class="btn btn-primary" href="{{ route('mahasiswas.edit',$mahasiswa->Nim) }}">Edit</a>              
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -77,5 +77,5 @@
         </tr>
         @endforeach
     </table>
-    {{$mahasiswas->links('pagination::bootstrap-4')}}
+
 @endsection 
