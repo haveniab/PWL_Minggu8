@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     use HasFactory;
-    protected $table='kelas';
+    protected $table='kelas'; //mendefinisikan bahwa model ini terkait dengan tabel kelas
 
-    public function mahasiwa()
-    {
+    public function mahasiswa(){
         return $this->hasMany(Mahasiswa::class);
     }
 }

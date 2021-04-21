@@ -1,5 +1,4 @@
 @extends('mahasiswas.layout')
-
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -28,13 +27,13 @@
                     </form>
                 </div>
             </div>
-            
-            <div class="float-right my-2">
 
+            <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('mahasiswas.create') }}"> Input Mahasiswa</a>
             </div>
         </div>
     </div>
+
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -49,33 +48,32 @@
             <th>Kelas</th>
             <th>Jurusan</th>
             <th>No_Handphone</th>
-            <th>Email</th>
+            <th>E-mail</th>
             <th>Tanggal_Lahir</th>
-            <th width="280px">Action</th>
+            <th width="900px">Action</th>
         </tr>
-        
-        @foreach($mahasiswa as $index => $mahasiswa)
-        <tr>
-
-            <td>{{ $mahasiswa->Nim}}</td>
-            <td>{{ $mahasiswa->Nama }}</td>
-            <td>{{ $mahasiswa->Kelas->nama_kelas}}</td>
-            <td>{{ $mahasiswa->Jurusan }}</td>
-            <td>{{ $mahasiswa->No_Handphone }}</td>
-            <td>{{ $mahasiswa->Email }}</td>
-            <td>{{ $mahasiswa->Tanggal_Lahir}}</td>
-            <td>
-            <form action="{{ route('mahasiswas.destroy',$mahasiswa->Nim) }}" method="POST">
-
-                <a class="btn btn-info" href="{{ route('mahasiswas.show',$mahasiswa->Nim) }}">Show</a>
-                <a class="btn btn-primary" href="{{ route('mahasiswas.edit',$mahasiswa->Nim) }}">Edit</a>              
+    @foreach ($mahasiswas as $Mahasiswa)
+    <tr>
+        <td>{{ $Mahasiswa->Nim }}</td>
+        <td>{{ $Mahasiswa->Nama }}</td>
+        <td>{{ $Mahasiswa->Kelas->nama_kelas  }}</td>
+        <td>{{ $Mahasiswa->Jurusan }}</td>
+        <td>{{ $Mahasiswa->No_Handphone }}</td>
+        <td>{{ $Mahasiswa->Email }}</td>
+        <td>{{ $Mahasiswa->Tanggal_Lahir }}</td>
+        <td width="900px">
+            <form action="{{ route('mahasiswas.destroy',$Mahasiswa->Nim) }}" method="POST">
+                <a class="btn btn-info" href="{{ route('mahasiswas.show',$Mahasiswa->Nim) }}">Show</a>
+                <a class="btn btn-primary" href="{{ route('mahasiswas.edit',$Mahasiswa->Nim) }}">Edit</a>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
+                <br><br>
+                
             </form>
-            </td>
-        </tr>
-        @endforeach
+        </td>
+    </tr>
+    @endforeach
     </table>
-
-@endsection 
+    {{$mahasiswas->links('pagination::bootstrap-4')}}
+@endsection
