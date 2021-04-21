@@ -14,25 +14,13 @@ class MahasiswaController extends Controller
      */
     public function index(Request $request)
     {
-        $mahasiswas = Mahasiswa::all(); // Mengambil semua isi tabel
-        $mahasiswas = Mahasiswa::where([
-            // Nomor2
-        //     ['Nama', '!=', Null]
-        // ])->orderBy("Nim", "asc")->paginate(5);
-        // $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
+        // $mahasiswa = Mahasiswa::all(); // Mengambil semua isi tabel
+        // $posts=Mahasiswa::orderBy('nim','asc')->paginate(5);
 
-        // Nomor 3
-        ['Nama', '!=', Null],
-            [function ($query) use ($request) {
-                if (($term = $request->term)) {
-                    $query->orWhere('Nama', 'LIKE', '%' . $term . '%')->get();
-                }
-            }]
-        ])
-            ->orderBy("Nim", "asc")
-            ->paginate(5);
-        return view('mahasiswas.index', compact('mahasiswas'))
-       ->with('i', (request()->input('page', 1) - 1) * 5);
+        //yang semula mahasiswa::all, diubah menjadi with() yang menyatakan relasi
+        $mahasiswa = Mahasiswa::with('kelas')->get();
+        $paginate = Mahasiswa::orderBY('Nim', 'asc')->paginate(3);
+        return view('mahasiswa.index', ['mahasiswa' => $mahasiswa, 'paginate'=>$paginate]);
     }
 
     /**
