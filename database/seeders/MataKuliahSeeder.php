@@ -14,7 +14,7 @@ class MataKuliahSeeder extends Seeder
      */
     public function run()
     {
-        $matkul = [
+        $matakuliah = [
             [
                 'nama_matkul' => 'Pemrograman Berbasis Objek',
                 'sks'=>3,
@@ -41,7 +41,7 @@ class MataKuliahSeeder extends Seeder
             ],
         ];
 
-        DB::table('matakuliah')->insert($matkul);
+        DB::table('matakuliah')->insert($matakuliah);
     
     }
 }

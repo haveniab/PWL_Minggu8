@@ -16,36 +16,36 @@ class MahasiswaController extends Controller
      */
     public function index(Request $request)
     {
-        $mahasiswas = Mahasiswa::all(); // Mengambil semua isi tabel
-        $mahasiswas = Mahasiswa::where([
+        // $mahasiswas = Mahasiswa::all(); // Mengambil semua isi tabel
+        // $mahasiswas = Mahasiswa::where([
             // Nomor2
     //     //     ['Nama', '!=', Null]
     //     // ])->orderBy("Nim", "asc")->paginate(5);
     //     // $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
 
-        // Nomor 3
-        ['Nama', '!=', Null],
-            [function ($query) use ($request) {
-                if (($term = $request->term)) {
-                    $query->orWhere('Nama', 'LIKE', '%' . $term . '%')->get();
-                }
-            }]
-        ])
-            ->orderBy("Nim", "asc")
-            ->paginate(3);
-        return view('mahasiswas.index', compact('mahasiswas'))
-       ->with('i', (request()->input('page', 1) - 1) * 5);
+    //     // Nomor 3
+    //     ['Nama', '!=', Null],
+    //         [function ($query) use ($request) {
+    //             if (($term = $request->term)) {
+    //                 $query->orWhere('Nama', 'LIKE', '%' . $term . '%')->get();
+    //             }
+    //         }]
+    //     ])
+    //         ->orderBy("Nim", "asc")
+    //         ->paginate(3);
+    //     return view('mahasiswas.index', compact('mahasiswas'))
+    //    ->with('i', (request()->input('page', 1) - 1) * 5);
 
-    // fungsi eloquent menampilkan data menggunakan pagination
-    // if($request->has('search')){
-    //     $mahasiswas = Mahasiswa::where('Nama', 'like', "%".$request->search."%")
-    //         ->orWhere('Nim', $request->search)
-    //         ->paginate(5);
-    // } else {
-    //     // fungsi eloquent menampilkan data menggunakan pagination
-    //     $mahasiswas = Mahasiswa::paginate(5);
-     //}
-    // return view('mahasiswas.index', compact('mahasiswas'));
+    //fungsi eloquent menampilkan data menggunakan pagination
+    if($request->has('search')){
+        $mahasiswas = Mahasiswa::where('Nama', 'like', "%".$request->search."%")
+            ->orWhere('Nim', $request->search)
+            ->paginate(3);
+    } else {
+        // fungsi eloquent menampilkan data menggunakan pagination
+        $mahasiswas = Mahasiswa::paginate(3);
+     }
+    return view('mahasiswas.index', compact('mahasiswas'));
      }
 
     /**
